@@ -1,47 +1,48 @@
 let combinedCSV = null;
 
 async function searchDatasets() {
-  const keyword = document.getElementById("keywordInput").value.trim();
-  const dropdown = document.getElementById("datasetDropdown");
-  const output = document.getElementById("outputText");
+    console.log("searchDatasets function triggered");  // Check if this is logged
+    
+    const keyword = document.getElementById("keywordInput").value.trim();  // Get the search keyword
+    const output = document.getElementById("outputText");
+    const dropdown = document.getElementById("datasetDropdown");
 
-  if (!keyword) {
-    output.innerText = "⚠️ Please enter a keyword first.";
-    return;
-  }
+    if (!keyword) {
+        output.innerText = "⚠️ Please enter a keyword first.";
+        return;
+    }
 
-  output.innerText = "🔍 Searching Kaggle and Hugging Face...";
-  dropdown.innerHTML = '<option disabled selected>Loading datasets...</option>';
+    output.innerText = "🔍 Searching for datasets...";
 
-  try {
-    const response = await fetch("https://gen-ai-dataset-finder-1.onrender.com/search", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query: keyword })
-    });
+    try {
+        // Send POST request with the search query
+        console.log("Sending request to backend...");
+        const response = await fetch("https://your-backend-url.com/search", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ query: keyword })
+        });
 
-    .then(response => response.json())
-    .then(data => {
-        console.log(data.generated_text);  // Display generated text
-    })
-    .catch(error => console.error('Error:', error));
+        console.log("Response Status: ", response.status);  // Log the response status
 
-    const data = await response.json();
-    dropdown.innerHTML = '<option disabled selected>Select a dataset...</option>';
+        const data = await response.json();
+        console.log("Data received from backend:", data);  // Log the data
 
-    data.results.forEach((item, i) => {
-      const option = document.createElement("option");
-      option.value = item.url;
-      option.text = `${item.title} (${item.source})`;
-      dropdown.appendChild(option);
-    });
+        // Process the response
+        dropdown.innerHTML = '<option disabled selected>Select a dataset...</option>';
+        data.results.forEach(item => {
+            const option = document.createElement("option");
+            option.value = item.url;
+            option.text = `${item.title} (${item.source})`;
+            dropdown.appendChild(option);
+        });
 
-    output.innerText = `✅ ${data.results.length} results found. Select a dataset.`;
+        output.innerText = `✅ ${data.results.length} results found. Select a dataset.`;
 
-  } catch (err) {
-    console.error(err);
-    output.innerText = "❌ Could not fetch datasets.";
-  }
+    } catch (err) {
+        console.error("Error during fetch:", err);
+        output.innerText = "❌ Could not fetch datasets.";
+    }
 }
 
 async function generateData() {
