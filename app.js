@@ -14,11 +14,17 @@ async function searchDatasets() {
   dropdown.innerHTML = '<option disabled selected>Loading datasets...</option>';
 
   try {
-    const response = await fetch("http://localhost:5000/search", {
+    const response = await fetch("https://gen-ai-dataset-finder-1.onrender.com/generate'", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ query: keyword })
     });
+
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.generated_text);  // Display generated text
+    })
+    .catch(error => console.error('Error:', error));
 
     const data = await response.json();
     dropdown.innerHTML = '<option disabled selected>Select a dataset...</option>';
