@@ -250,6 +250,30 @@ def summarize_only_route():
 def home():
     return "Hello from the backend!"  # Or return a JSON response like {"message": "Hello from the backend!"}
 
+from flask import Flask, request, jsonify
+from flask_cors import CORS  # Import CORS
+
+# Initialize the Flask app
+app = Flask(__name__)
+
+# Allow cross-origin requests from any domain (use this for development)
+CORS(app)  # This will allow all origins to access your backend
+
+# You can also restrict it to a specific frontend domain like this:
+# CORS(app, origins=["https://your-frontend-url.com"])
+
+@app.route("/search", methods=["POST"])
+def search():
+    data = request.get_json()  # Get the incoming JSON data (the search query)
+    print(f"Received search query: {data['query']}")  # Log the query for debugging
+    
+    # Simulate a dataset response (replace with actual logic or database query)
+    results = [{"title": "Dataset 1", "url": "https://example.com/dataset1", "source": "Kaggle"}]
+    print(f"Returning {len(results)} results")  # Log the number of results being sent
+    
+    return jsonify({"results": results})  # Send the results as a JSON response
 # =========================
 if __name__ == "__main__":
     app.run(debug=True)
+
+
