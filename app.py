@@ -250,10 +250,6 @@ def summarize_only_route():
 def home():
     return "Hello from the backend!"  # Or return a JSON response like {"message": "Hello from the backend!"}
 
-if _name_ == "_main_":
-    app.run(debug=True)
-
-
 # =========================
 if __name__ == "__main__":
     app.run(debug=True)
