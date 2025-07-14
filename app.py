@@ -9,11 +9,6 @@ from datasets import load_dataset
 import requests
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
-import streamlit as st
-import pickle
-import numpy as np
-
-
 
 load_dotenv()
 
