@@ -246,6 +246,13 @@ def summarize_only_route():
     summary = summarize_only(url)
     return jsonify({ "summary": summary })
 
+@app.route('/')
+def home():
+    return "Hello from the backend!"  # Or return a JSON response like {"message": "Hello from the backend!"}
+
+if _name_ == "_main_":
+    app.run(debug=True)
+
 
 # =========================
 if __name__ == "__main__":
