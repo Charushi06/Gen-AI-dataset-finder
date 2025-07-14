@@ -14,7 +14,7 @@ async function searchDatasets() {
   dropdown.innerHTML = '<option disabled selected>Loading datasets...</option>';
 
   try {
-    const response = await fetch("https://gen-ai-dataset-finder-1.onrender.com/generate", {
+    const response = await fetch("https://gen-ai-dataset-finder-1.onrender.com/generate'", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ query: keyword })
