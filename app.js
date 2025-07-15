@@ -1,5 +1,7 @@
 let combinedCSV = null;
 
+const BACKEND_URL = "https://gen-ai-dataset-finder-1.onrender.com";
+
 async function searchDatasets() {
     console.log("searchDatasets function triggered");  // Check if this is logged
     
@@ -17,7 +19,7 @@ async function searchDatasets() {
     try {
         // Send POST request with the search query
         console.log("Sending request to backend...");
-        const response = await fetch("https://your-backend-url.com/search", {
+        const response = await fetch(`${BACKEND_URL}/search`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ query: keyword })
@@ -75,7 +77,7 @@ async function generateData() {
 
   try {
     // Step 3: Send request
-    const response = await fetch("http://localhost:5000/generate_rows_only", {
+    const response = await fetch(`${BACKEND_URL}/generate_rows_only`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(requestBody),
@@ -126,22 +128,22 @@ async function generateData() {
   }
 }
 
-fetch('/generate_rows_only', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ url: selectedUrl, rows: numRows })
-})
-.then(res => res.json())
-.then(data => {
-  generatedCSV = data.synthetic_csv;  // show this on screen
-  combinedCSV = data.combined_csv;    // use this for download
+// fetch('/generate_rows_only', {
+//   method: 'POST',
+//   headers: { 'Content-Type': 'application/json' },
+//   body: JSON.stringify({ url: selectedUrl, rows: numRows })
+// })
+// .then(res => res.json())
+// .then(data => {
+//   generatedCSV = data.synthetic_csv;  // show this on screen
+//   combinedCSV = data.combined_csv;    // use this for download
 
-  // display generated rows
-  document.getElementById("csvPreview").textContent = generatedCSV;
+//   // display generated rows
+//   document.getElementById("csvPreview").textContent = generatedCSV;
 
-  // enable download button
-  document.getElementById("downloadBtn").disabled = false;
-});
+//   // enable download button
+//   document.getElementById("downloadBtn").disabled = false;
+// });
 
 
 async function generateSummary() {
@@ -156,7 +158,7 @@ async function generateSummary() {
   output.innerText = `⏳ Generating summary...`;
 
   try {
-    const response = await fetch("http://localhost:5000/summarize_only", {
+    const response = await fetch(`${BACKEND_URL}/summarize_only`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ url })
