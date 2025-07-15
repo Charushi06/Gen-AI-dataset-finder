@@ -29,7 +29,7 @@ login(token=os.getenv("HF_TOKEN"))
 
 # ✅ Flask App
 app = Flask(__name__)
-CORS(app, origins=["https://genaidatasetfinder.netlify.app/"])
+CORS(app)
 
 # ✅ Scrape description from dataset page
 def get_description(url):
