@@ -1,4 +1,5 @@
 # Gen-AI Dataset Finder
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Netlify-8400FF?style=for-the-badge&logo=netlify)](https://genaidatasetfinder.netlify.app/)
 
 Gen-AI Dataset Finder is a tool designed to help users quickly discover, explore, and access datasets related to Generative AI, Machine Learning, and Artificial Intelligence projects.  
 It simplifies the process of finding datasets for research, projects, and experiments.
